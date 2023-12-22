@@ -1,49 +1,26 @@
-#include<stdio.h>
-#include<string.h>
-#include<stdbool.h>
+#include <stdio.h>
+#include<math.h>
 
+double mysqrt(double x);
 int main(void) {
 
-	char a[100];
+	double x;
 
-	printf("パスワードを入力してください");
+	printf("\tx\tsqrt x\t\tmysqrt x\n");
 
-	scanf_s(" % 99s");
+	for (x = 1; x <= 10; x += 1){
+		printf("t%3.1f\t%12.10f\t%12.10f\n",x,sqrt(x),mysqrt(x));
+	}
+	return 0;
+}
 
-	int len = strlen(a);
-	int big = 0;
-	int small = 0;
-	int other = 0;
+double mysqrt(double x) {
+	const double eps = 1.0e-10;
+	double guess = 1.0;
 
-	for (int i = 0; i < len; i++){
-
-		if (a[i] >= 'A' && a[i] <= 'Z') big++;
-		else if (a[i] >= 'a' && a[i] <= 'z') small++;
-		else other++;
-
+	while (fabs(guess * guess - x) >= eps) {
+		guess = (guess + x / guess) / 2.0;
 	}
 
-	bool l = false;
-	bool b = false;
-	bool s = false;
-	bool o = false;
-
-	if (len >= 8 && len <= 16) l = true;
-	if (big >= 1)b = true;
-	if (small >= 1)s = true;
-	if (other >= 1)o = true;
-
-	if (l == true && b == true && s == true && o == true) printf("条件に合致しています！");
-
-	if (l == false) printf("長さが足りません！");
-	if (b == false)printf("大文字が入っていません！");
-	if (s == false) printf("小文字が入っていません！");
-	if (o == false)printf("その他の文字が入っていません！");
-
-
-	//if (len >= 8 && len <= 16 && big >= 1 && small >= 1 && other >= 1) printf("条件に合致しています！");
-	//else if (len>=8)
-
-	return 0;
-
+	return guess;
 }
