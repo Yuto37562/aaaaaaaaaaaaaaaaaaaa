@@ -1,0 +1,54 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string>
+
+int main(void) {
+	char word[3] = {"aa","d","e"};
+	char aword = word[rand() % 5];
+
+	/*switch (a) {
+	case 1:
+		word = 'a';
+	case 2:
+		word = 'b';
+	case 3:
+		word = 'c';
+	case 4:
+		word = 'd';
+	case 5:
+		word = 'e';
+	}
+	printf("%c\n", word);
+	*/
+
+	printf("文字を推測してください\n");
+	char userword;
+	scanf_s("%c",&userword);
+
+	printf("%c\n", userword);
+
+	int i = 0;
+
+	if (userword == word) {
+		printf("ok\n");
+	}
+	else printf("a\n");
+
+	int j = 0;
+	int k = 0;
+
+	do {
+		for (int i = 0; i < 10; i++) {
+			if (userword[i] == word[i]) {
+				printf("%c", word[i]);
+				k++;
+			}
+			else(printf("_"));
+		}
+		j++;
+		if (k == strlen(word)) break;
+	} while (j < 10);
+
+	return 0;
+
+}
